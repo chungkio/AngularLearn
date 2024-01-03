@@ -32,7 +32,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/bootstrap/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -100,5 +102,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "a6538cd1-eb07-4433-b322-c2e281c97af9"
   }
 }
