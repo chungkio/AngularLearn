@@ -29,7 +29,9 @@ export class UserComponent implements OnInit {
     // Thực hiện kiểm tra đăng nhập ở đây
     if (this.isValidUser()) {
       // Nếu đăng nhập thành công
+      console.log('Login redirect /user/listing');
       this.router.navigate(['/user/listing']);
+      console.log('Login successful');
     } else {
       // Xử lý khi đăng nhập không thành công
       console.log('Login failed');
