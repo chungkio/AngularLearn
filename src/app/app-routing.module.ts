@@ -4,17 +4,10 @@ import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 
 import { LoginRegisterComponent } from './login-register/login-register.component';
-import { UserListComponent } from './user/user-list/user-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  {
-    path: 'user',
-    component: UserComponent ,
-    children: [
-      { path: 'listing', component: UserListComponent }
-    ]
-  },
+  { path: 'user', component: UserComponent },
   { path: 'account', component: LoginRegisterComponent },
 ];
 

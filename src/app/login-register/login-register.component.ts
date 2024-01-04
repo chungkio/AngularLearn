@@ -24,7 +24,7 @@ export class LoginRegisterComponent {
   }
 
   private redirectToUserListing(): void {
-    console.log('Login redirect /user/listing');
-    this.router.navigateByUrl('/user/listing');
+    console.log('Login redirect /user');
+    this.router.navigateByUrl('/user');
   }
 }
