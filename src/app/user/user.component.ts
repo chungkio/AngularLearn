@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
+interface User {
+  username: string;
+  password: string;
+  email: string;
+  role: string;
+  dateCreate: string;
+}
 
 @Component({
   selector: 'app-users',
@@ -7,42 +14,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  users: any[] = [];
+  public users: User[] = [];
+  public pages: number[] = [];
 
+  // Use ngOnInit to initialize data
   ngOnInit(): void {
-    // Tạo danh sách 5 data mẫu
-    this.users = [
-      { username: 'admin', password: 'admin123', role: 'admin', dateCreate: '2024-01-03' },
-      { username: 'user2', password: 'pass2', role: 'user', dateCreate: '2024-01-04' },
-      { username: 'user3', password: 'pass3', role: 'editor', dateCreate: '2024-01-05' },
-      { username: 'user4', password: 'pass4', role: 'user', dateCreate: '2024-01-06' },
-      { username: 'user5', password: 'pass5', role: 'admin', dateCreate: '2024-01-07' }
-    ];
+    this.initializeSampleData();
+    this.initializePagination();
+    console.log('Users:', this.users);
   }
 
-  username: string = '';
-  password: string = '';
+  // Create a separate method to initialize sample data
+  private initializeSampleData(): void {
+    // Clear existing users
+    this.users = [];
 
-  constructor(private router: Router) {}
+    // Create 25 sample users
+    for (let i = 1; i <= 25; i++) {
+      const user: User = {
+        username: `user${i}`,
+        password: `pass${i}`,
+        email: `user${i}@gmail.com`,
+        role: i % 2 === 0 ? 'user' : 'admin',
+        dateCreate: `2024-01-${i < 10 ? '0' + i : i}`
+      };
 
-  login() {
-    // Thực hiện kiểm tra đăng nhập ở đây
-    if (this.isValidUser()) {
-      // Nếu đăng nhập thành công
-      console.log('Login redirect /user/listing');
-      this.router.navigate(['/user/listing']);
-      console.log('Login successful');
-    } else {
-      // Xử lý khi đăng nhập không thành công
-      console.log('Login failed');
+      this.users.push(user);
     }
   }
 
-  private isValidUser(): boolean {
-    // Truy vấn username password
-    const user = this.users.find(u => u.username === this.username && u.password === this.password);
-
-    // kiểm tra quyền của user
-    return user && user.role === 'admin';
+  private initializePagination(): void {
+    // For demonstration purposes, let's assume 5 pages
+    this.pages = Array.from({ length: 15 }, (_, i) => i + 1);
   }
+
 }
