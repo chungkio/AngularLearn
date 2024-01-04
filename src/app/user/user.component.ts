@@ -15,13 +15,15 @@ interface User {
 })
 export class UserComponent implements OnInit {
   public users: User[] = [];
-  public pages: number[] = [];
+  public itemsPerPage = 10;
+  public pages: number[] = []; // Add this line
+  public currentPage = 1;
 
   // Use ngOnInit to initialize data
   ngOnInit(): void {
     this.initializeSampleData();
     this.initializePagination();
-    console.log('Users:', this.users);
+    this.users = this.getUsersForPage(this.currentPage);
   }
 
   // Create a separate method to initialize sample data
@@ -44,8 +46,20 @@ export class UserComponent implements OnInit {
   }
 
   private initializePagination(): void {
-    // For demonstration purposes, let's assume 5 pages
-    this.pages = Array.from({ length: 15 }, (_, i) => i + 1);
+    const totalPages = Math.ceil(this.users.length / this.itemsPerPage);
+    this.pages = Array.from({ length: totalPages }, (_, i) => i + 1);
   }
 
+  // Method to get users for the current page
+  public getUsersForPage(pageNumber: number): User[] {
+    const startIndex = (pageNumber - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.users.slice(startIndex, endIndex);
+  }
+
+  public changePage(pageNumber: number): void {
+    this.initializeSampleData();
+    this.currentPage = pageNumber;
+    this.users = this.getUsersForPage(this.currentPage);
+  }
 }

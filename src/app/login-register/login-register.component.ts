@@ -16,7 +16,6 @@ export class LoginRegisterComponent {
 
   public login(): void {
     if (this.authService.login(this.username, this.password)) {
-      console.log('Login successful');
       this.redirectToUserListing();
     } else {
       console.log('Login failed');
@@ -24,7 +23,6 @@ export class LoginRegisterComponent {
   }
 
   private redirectToUserListing(): void {
-    console.log('Login redirect /user');
     this.router.navigateByUrl('/user');
   }
 }
